@@ -6,20 +6,24 @@ This action downloads runs `leptosfmt` on your repository.
 
 ## Passing arguments
 
-This action uses [leptosfmt](https://github.com/bram209/leptosfmt) for link checking.
+This action uses [leptosfmt] for link checking.
 `leptosfmt` arguments can be passed to the action via the `args` parameter.
 
-On top of that, the action also supports some additional arguments.
+The action also supports some additional arguments.
 
-| Argument         | Default                 | Description                                                                     |
-| -------------    | ----------------------- | ------------------------------------------------------------------------------- |
-| args             | `./**/*.rs --check`     | See [Leptosfmt's documentation][leptosfmt-args] for all arguments and values    |
-| debug            | `false`                 | Enable debug output in action (set -x). Helpful for troubleshooting             |
-| failOnError      | `false`                 | Fail workflow run on error (i.e. when leptosfmt exit code is not 0)             |
-| leptosfmtVersion | `0.1.32`                | Overwrite the `leptosfmt` version to be used                                    |
-| output           | `leptosfmt_output.txt`  | Output from `leptosfmt` will be written to this file                            |
+| Argument           | Default                 | Description                                                                     |
+| -------------      | ----------------------- | ------------------------------------------------------------------------------- |
+| `args`             | `./**/*.rs --check`     | See [Leptosfmt's documentation][leptosfmt-args] for all arguments and values    |
+| `debug`            | `false`                 | Enable debug output in action (set -x). Helpful for troubleshooting             |
+| `failOnError`      | `false`                 | Fail workflow run on error (i.e. when leptosfmt exit code is not 0)             |
+| `leptosfmtVersion` | `0.1.32`                | Overwrite the `leptosfmt` version to be used                                    |
+| `output`           | `leptosfmt_output.txt`  | Output from `leptosfmt` will be written to this file                            |
 
-[leptosfmt-args]: https://github.com/bram209/leptosfmt?tab=readme-ov-file#usage
+## Outputs
+
+| Output      | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| `exit_code` | Exit code of `leptosfmt`                                                    |
 
 ## Sample workflow
 
@@ -46,3 +50,7 @@ jobs:
         run: |
           cat leptosfmt_output.txt
 ```
+
+[leptosfmt]: https://github.com/bram209/leptosfmt
+[leptosfmt-args]: https://github.com/bram209/leptosfmt?tab=readme-ov-file#usage
+
