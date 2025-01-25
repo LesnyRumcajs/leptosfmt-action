@@ -39,33 +39,29 @@ runs:
         rm -f $(which leptosfmt)
       shell: bash
 
-    - name: Download and extract leptosfmt
+    - name: Download and install leptosfmt
       id: leptosfmt-setup
       run: |
         # Determine filename and download URL based on version
         FILENAME="leptosfmt-${LEPTOSFMT_VERSION}-x86_64-unknown-linux-musl.tar.gz"
         DOWNLOAD_URL="https://github.com/bram209/leptosfmt/releases/download/${LEPTOSFMT_VERSION}/${FILENAME}"
 
+        TMPDIR=$(mktemp -d)
+        pushd $TMPDIR
         echo "Downloading from: ${DOWNLOAD_URL}"
         curl -sfLO "${DOWNLOAD_URL}"
 
         echo "Extracting ${FILENAME}"
-        tar -xvzf "${FILENAME}"
+        tar -xvzf "${FILENAME}" > /dev/null
 
-        # Output filename for use in later steps
-        echo "filename=${FILENAME}" >> $GITHUB_OUTPUT
+        echo "Installing leptosfmt"
+        install --target-directory "$HOME/.local/bin" -D leptosfmt
+
+        popd
+        echo "Cleaning up temporary files in $TMPDIR"
+        rm -rf $TMPDIR
       env:
         LEPTOSFMT_VERSION: ${{ inputs.leptosfmtVersion }}
-      shell: bash
-
-    - name: Install leptosfmt
-      run: |
-        install -t "$HOME/.local/bin" -D leptosfmt
-      shell: bash
-
-    - name: Clean up installation files
-      run: |
-        rm -f "${{ steps.leptosfmt-setup.outputs.filename }}"
       shell: bash
 
     - name: Run leptosfmt
