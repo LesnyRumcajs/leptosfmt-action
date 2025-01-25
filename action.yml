@@ -1,4 +1,4 @@
-name: "leptosfmt formatter"
+name: "leptosfmt action"
 description: "Formatter for the leptos view! macros"
 
 inputs:
