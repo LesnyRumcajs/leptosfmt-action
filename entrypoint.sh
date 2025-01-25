@@ -6,6 +6,8 @@ ARGS="${INPUT_ARGS}"
 OUTPUT="${INPUT_OUTPUT}"
 DEBUG="${INPUT_DEBUG}"
 
+mkdir -p $(dirname ${OUTPUT})
+
 if [ "${DEBUG}" == "true" ]; then
   echo "Running in debug mode"
   set -x
@@ -14,7 +16,7 @@ fi
 eval leptosfmt ${ARGS} | tee ${OUTPUT}
 EXIT_CODE=$?
 
-if [ $(DEBUG) == "true" ]; then
+if [ "${DEBUG}" == "true" ]; then
   echo "Output:"
   cat ${OUTPUT}
   echo "Exit code: ${EXIT_CODE}"

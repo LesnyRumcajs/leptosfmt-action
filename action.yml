@@ -12,7 +12,7 @@ inputs:
     required: false
   output:
     description: "Summary output file path"
-    default: "leptosfmt/out"
+    default: "leptosfmt_output.txt"
     required: false
   debug:
     description: "Enable debug output"
