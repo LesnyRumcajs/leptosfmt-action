@@ -8,7 +8,7 @@ inputs:
     required: false
   leptosfmtVersion:
     description: "Use custom version of leptosfmt"
-    default: v0.1.32
+    default: 0.1.32
     required: false
   output:
     description: "Summary output file path"
