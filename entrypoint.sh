@@ -5,6 +5,7 @@ set +e
 ARGS="${INPUT_ARGS}"
 OUTPUT="${INPUT_OUTPUT}"
 DEBUG="${INPUT_DEBUG}"
+FAIL_ON_ERROR="${INPUT_FAIL_ON_ERROR}"
 
 mkdir -p $(dirname ${OUTPUT})
 
@@ -16,10 +17,18 @@ fi
 eval leptosfmt ${ARGS} | tee ${OUTPUT}
 EXIT_CODE=$?
 
+# Pass leptosfmt exit code to subsequent steps
+echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+
 if [ "${DEBUG}" == "true" ]; then
   echo "Output:"
   cat ${OUTPUT}
   echo "Exit code: ${EXIT_CODE}"
 fi
 
-exit ${EXIT_CODE}
+if [ "${FAIL_ON_ERROR}" == "true" ] && [ ${EXIT_CODE} -ne 0 ]; then
+  echo "Exiting with error code ${EXIT_CODE}"
+  exit ${EXIT_CODE}
+fi
+
+exit 0

@@ -17,12 +17,15 @@ inputs:
   debug:
     description: "Enable debug output"
     default: "false"
+  failOnError:
+    description: "Fail if leptosfmt returns a non-zero exit code"
+    default: "true"
     required: false
 
 outputs:
   exit_code:
     description: "The exit code returned from leptosfmt"
-    value: ${{ steps.run-leptosfmt.outputs.exit_code }}
+    value: ${{ steps.leptosfmt.outputs.exit_code }}
 
 runs:
   using: "composite"
@@ -65,13 +68,14 @@ runs:
       shell: bash
 
     - name: Run leptosfmt
-      id: run-leptosfmleptosfmt
+      id: leptosfmt
       run: ${{ github.action_path }}/entrypoint.sh
       env:
         # https://github.com/actions/runner/issues/665
         INPUT_ARGS: ${{ inputs.ARGS }}
         INPUT_OUTPUT: ${{ inputs.OUTPUT }}
         INPUT_DEBUG: ${{ inputs.DEBUG }}
+        INPUT_FAIL_ON_ERROR: ${{ inputs.FAIL_ON_ERROR }}
       shell: bash
 branding:
   icon: "external-link"
