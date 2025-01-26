@@ -42,8 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: leptosfmt
-        uses: LesnyRumcajs/leptosfmt-action@main
+      - uses: LesnyRumcajs/leptosfmt-action@v0.1.0
 ```
 
 ## Sample workflow with custom arguments
@@ -63,7 +62,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: leptosfmt
         id: leptosfmt
-        uses: LesnyRumcajs/leptosfmt-action@main
+        uses: LesnyRumcajs/leptosfmt-action@v0.1.0
         with:
           failOnError: false
       - name: print outputs
