@@ -20,15 +20,10 @@ EXIT_CODE=$?
 # Pass leptosfmt exit code to subsequent steps
 echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
 
-if [ "${DEBUG}" == "true" ]; then
-  echo "Output:"
-  cat ${OUTPUT}
-  echo "Exit code: ${EXIT_CODE}"
-fi
-
-if [ "${FAIL_ON_ERROR}" == "true" ] && [ ${EXIT_CODE} -ne 0 ]; then
+if [ "${FAIL_ON_ERROR}" == "true" ]; then
   echo "Exiting with error code ${EXIT_CODE}"
   exit ${EXIT_CODE}
 fi
 
+echo "Exiting with code 0"
 exit 0

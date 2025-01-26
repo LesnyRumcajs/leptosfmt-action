@@ -13,4 +13,45 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: test default
+        id: test-default
         uses: ./
+        continue-on-error: true
+      - name: check previous step failed
+        if: steps.test-default.outcome != 'failure'
+        run: |
+          echo "test-default should have failed (badly formatted files in the repo)"
+          exit 1
+
+
+      - name: test well-formatted
+        uses: ./
+        with:
+          debug: "true"
+          args: --check ./test-assets/well_formatted.rs
+
+      - name: test badly formatted
+        id: test-badly-formatted
+        continue-on-error: true
+        uses: ./
+        with:
+          debug: "true"
+          args: --check ./test-assets/badly_formatted.rs
+      - name: check previous step failed
+        if: steps.test-badly-formatted.outcome != 'failure'
+        run: |
+          echo "test-badly-formatted should have failed"
+          exit 1
+
+      - name: test badly formatted with error allowed
+        uses: ./
+        with:
+          debug: "true"
+          failOnError: "false"
+          args: --check ./test-assets/badly_formatted.rs
+
+      - name: test well-formatted custom version
+        uses: ./
+        with:
+          debug: "true"
+          args: --check ./test-assets/well_formatted.rs
+          leptosfmtVersion: "0.1.31"

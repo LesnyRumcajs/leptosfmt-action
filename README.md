@@ -1,4 +1,5 @@
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Leptosfmt%20Action-blue.svg?colorA=24292e&colorB=0366d6&style=flat&longCache=true&logo=github)](https://github.com/marketplace/actions/leptosfmt-action)
+[![Test leptosfmt action](https://github.com/LesnyRumcajs/leptosfmt-action/actions/workflows/test.yml/badge.svg)](https://github.com/LesnyRumcajs/leptosfmt-action/actions/workflows/test.yml)
 
 # `leptosfmt` action
 
@@ -16,7 +17,7 @@ The action also supports some additional arguments.
 | -------------      | ----------------------- | ------------------------------------------------------------------------------- |
 | `args`             | `./**/*.rs --check`     | See [Leptosfmt's documentation][leptosfmt-args] for all arguments and values    |
 | `debug`            | `false`                 | Enable debug output in action (set -x). Helpful for troubleshooting             |
-| `failOnError`      | `false`                 | Fail workflow run on error (i.e. when leptosfmt exit code is not 0)             |
+| `failOnError`      | `true`                  | Fail workflow run on error (i.e. when leptosfmt exit code is not 0)             |
 | `leptosfmtVersion` | `0.1.32`                | Overwrite the `leptosfmt` version to be used                                    |
 | `output`           | `leptosfmt_output.txt`  | Output from `leptosfmt` will be written to this file                            |
 

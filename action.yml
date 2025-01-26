@@ -75,7 +75,7 @@ runs:
         INPUT_ARGS: ${{ inputs.ARGS }}
         INPUT_OUTPUT: ${{ inputs.OUTPUT }}
         INPUT_DEBUG: ${{ inputs.DEBUG }}
-        INPUT_FAIL_ON_ERROR: ${{ inputs.FAIL_ON_ERROR }}
+        INPUT_FAIL_ON_ERROR: ${{ inputs.FAILONERROR }}
       shell: bash
 branding:
   icon: "external-link"
