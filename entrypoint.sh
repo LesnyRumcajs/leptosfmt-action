@@ -7,14 +7,14 @@ OUTPUT="${INPUT_OUTPUT}"
 DEBUG="${INPUT_DEBUG}"
 FAIL_ON_ERROR="${INPUT_FAIL_ON_ERROR}"
 
-mkdir -p $(dirname ${OUTPUT})
+mkdir -p "$(dirname "${OUTPUT}")"
 
 if [ "${DEBUG}" == "true" ]; then
   echo "Running in debug mode"
   set -x
 fi
 
-eval leptosfmt ${ARGS} | tee ${OUTPUT}
+eval leptosfmt "${ARGS}" | tee "${OUTPUT}"
 EXIT_CODE=$?
 
 # Pass leptosfmt exit code to subsequent steps
